@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>一起来看烟花跨年到2024吧</title>
+  <title>一起来看烟花跨年到<span id="currentYear"></span>吧</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
@@ -632,7 +632,16 @@
 
 <body>
 
+    <!-- 页面内容 -->
 
+    <script>
+        // 动态获取年份并更新标题
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearSpan = document.getElementById('currentYear');
+            const currentYear = new Date().getFullYear()+1; // 输出：2025（基于当前时间）
+            yearSpan.textContent = currentYear;
+        });
+    </script>
   
   <div id="yhBtn"
     style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff ; font-size:15px    ">
