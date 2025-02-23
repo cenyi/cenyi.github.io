@@ -2034,6 +2034,24 @@
       }
     }
 
+    const colorfulCloudShell = (size) => ({
+        color: Array.from({length: 7}, (_, i) => `hsl(${i * 51}, 100%, 50%)`),
+        burstType: BURST_TYPES.CIRCULAR,
+        starCount: 180,
+        starLife: 2.8,
+        starSize: [1.2, 2.8],
+        explosionSize: size * 0.85,
+        explosionForce: 3200,
+        burstRadius: 380,
+        burstAngle: FULL_CIRCLE,
+        starOptions: {
+            trailLength: 28,
+            trailFade: 0.9,
+            gravity: 0.7,
+            jitter: 0.35
+        }
+    });
+
     const ghostShell = (size = 1) => {
       // Extend crysanthemum shell
       const shell = crysanthemumShell(size)
@@ -2235,7 +2253,8 @@
       Palm: palmShell,
       Ring: ringShell,
       Strobe: strobeShell,
-      Willow: willowShell
+      Willow: willowShell,
+      ColorfulCloud: () => colorfulCloudShell,
     }
 
     const shellNames = Object.keys(shellTypes)
@@ -2465,7 +2484,9 @@
       const barrageCount = IS_DESKTOP ? 11 : 5
       const specialIndex = IS_DESKTOP ? 3 : 1
       const shellSize = Math.max(0, shellSizeSelector() - 2)
-      const randomMainShell = Math.random() < 0.78 ? crysanthemumShell : ringShell
+      const randomMainShell = Math.random() < 0.78 ? 
+        (Math.random() < 0.6 ? crysanthemumShell : colorfulCloudShell) : 
+        ringShell;
       const randomSpecialShell = randomFastShell()
 
       // (cos(x*5π+0.5π)+1)/2 is a custom wave bounded by 0 and 1 used to set varying launch heights
@@ -3853,10 +3874,6 @@
     // jump2()
     window.onpageshow = jump2
   </script>
-
-
-
-
 
 
 </body>
